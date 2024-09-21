@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="String1" xml:space="preserve">
-    <value>にゅーとらる値</value>
+    <value>japanese</value>
+  </data>
+  <data name="Greeting" xml:space="preserve">
+    <value>2</value>
   </data>
 </root>

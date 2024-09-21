@@ -2,10 +2,30 @@
 
 @rendermode InteractiveServer
 
+@inject IStringLocalizer<Resources> Loc
+
 <PageTitle>著者データの編集</PageTitle>
 
-<h3>著者データの編集</h3>
-<h5>著者データを修正してください。</h5>
+<h1>Culture Example 2</h1>
+
+<h2>Greeting</h2>
+
+<p>
+    @Loc["Greeting"]
+</p>
+
+<p>
+    @greeting
+</p>
+
+@code {
+    private string? greeting;
+
+    protected override void OnInitialized()
+    {
+        greeting = Loc["Greeting"];
+    }
+}
 
 <EditForm Model="@vm" OnValidSubmit="@UpdateData">
     <DataAnnotationsValidator />

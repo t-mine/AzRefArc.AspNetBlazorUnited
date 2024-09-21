@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Greeting" xml:space="preserve">
-    <value>Hello World!</value>
+  <data name="RequiredError" xml:space="preserve">
+    <value>{0}は必須です。</value>
   </data>
-  <data name="Greeting2" xml:space="preserve">
-    <value>Hello2</value>
+  <data name="MaxLengthError" xml:space="preserve">
+    <value>{0}は{1}文字以内で入力してください。</value>
   </data>
 </root>

@@ -8,8 +8,8 @@ namespace AzRefArc.AspNetBlazorUnited.Components.Pages
     {
         [Display(Name = "著者名（名）")]
         // [Required(ErrorMessage = "著者名（名）は必須入力です。")]
-        [Required(ErrorMessageResourceName = "Greeting", ErrorMessageResourceType = typeof(SharedResources))]
-        [RegularExpression(@"^[\u0020-\u007e]{1,20}$", ErrorMessage = "著者名（名）は半角 20 文字以内で入力してください。")]
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(SharedResources))]
+        [StringLength(20, ErrorMessageResourceName = "MaxLengthError", ErrorMessageResourceType = typeof(SharedResources))]
         public string AuthorFirstName { get; set; } = String.Empty;
 
     }

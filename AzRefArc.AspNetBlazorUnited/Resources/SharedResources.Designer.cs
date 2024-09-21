@@ -61,20 +61,20 @@ namespace AzRefArc.AspNetBlazorUnited.Resources {
         }
         
         /// <summary>
-        ///   Hello World! に類似しているローカライズされた文字列を検索します。
+        ///   {0}は{1}文字以内で入力してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Greeting {
+        public static string MaxLengthError {
             get {
-                return ResourceManager.GetString("Greeting", resourceCulture);
+                return ResourceManager.GetString("MaxLengthError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Hello2 に類似しているローカライズされた文字列を検索します。
+        ///   {0}は必須です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Greeting2 {
+        public static string RequiredError {
             get {
-                return ResourceManager.GetString("Greeting2", resourceCulture);
+                return ResourceManager.GetString("RequiredError", resourceCulture);
             }
         }
     }

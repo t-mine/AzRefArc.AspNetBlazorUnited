@@ -1,0 +1,32 @@
+﻿@page "/FormTest"
+
+@rendermode InteractiveServer
+
+<PageTitle>著者データの編集</PageTitle>
+
+<h3>著者データの編集</h3>
+<h5>著者データを修正してください。</h5>
+
+<EditForm Model="@vm" OnValidSubmit="@UpdateData">
+    <DataAnnotationsValidator />
+
+    <dt>著者名(名)</dt>
+    <dd><InputText @bind-Value="vm.AuthorFirstName" class="form-text" /></dd>
+
+    <button type="submit" class="btn btn-primary">更新</button>
+
+    <ValidationSummary />
+</EditForm>
+
+
+@code {
+
+    // ビューモデル
+    private FormTestViewModel vm = new FormTestViewModel();
+
+    public void UpdateData()
+    {
+
+    }
+
+}

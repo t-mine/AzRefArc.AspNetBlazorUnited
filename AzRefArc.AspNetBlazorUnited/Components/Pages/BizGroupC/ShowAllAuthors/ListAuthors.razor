@@ -1,0 +1,59 @@
+﻿@page "/BizGroupC/ShowAllAuthors/ListAuthors"
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+@rendermode InteractiveServerWithoutPrerendering
+
+@* アプリケーションサービス *@
+@inject IDbContextFactory<PubsDbContext> dbFactory
+
+<PageTitle>著者データ一覧</PageTitle>
+
+<h3>著者データ一覧</h3>
+
+<hr />
+
+@if (authors == null)
+{
+    <p><em>現在データを取得中です...</em></p>
+}
+else if (authors.Count == 0)
+{
+    <p><em>データが一件もありません。</em></p>
+}
+else
+{
+    <div class="table-responsive">
+        <QuickGrid Items="@authors.AsQueryable()" Pagination="@paginationState">
+            <PropertyColumn Property="@(a => a.AuthorId)" Title="著者ID" Sortable="true" />
+            <TemplateColumn Title="著者名" Sortable="true" SortBy="@(GridSort<Author>.ByAscending(a => a.AuthorFirstName).ThenAscending(a => a.AuthorLastName))">
+                @(context.AuthorFirstName + " " + context.AuthorLastName)
+            </TemplateColumn>
+            <PropertyColumn Property="@(a => a.Phone)" Title="電話番号" Sortable="true" />
+            <PropertyColumn Property="@(a => a.State)" Title="州" Sortable="true" />
+            <TemplateColumn Title="契約有無" Sortable="true" SortBy="@(GridSort<Author>.ByAscending(a => a.Contract))">
+                <input type="checkbox" disabled checked="@(context.Contract)" />
+                @(context.Contract ? "契約あり" : "契約なし")
+            </TemplateColumn>
+        </QuickGrid>
+        <Paginator State="@paginationState" />
+    </div>
+}
+
+@code {
+    // 外部パラメータ
+
+    // ビューモデル
+    List<Author>? authors { get; set; } = new List<Author>();
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 10 };
+
+    // イベントハンドラ(アプリケーション処理)
+    protected override async Task OnInitializedAsync()
+    {
+        authors = null;
+        await Task.Delay(1000);
+        await using (var pubs = await dbFactory.CreateDbContextAsync())
+        {
+            authors = await pubs.Authors.ToListAsync();
+        }
+    }
+}

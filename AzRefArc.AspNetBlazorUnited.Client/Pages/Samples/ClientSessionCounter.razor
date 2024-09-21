@@ -1,0 +1,29 @@
+﻿@page "/Samples/ClientSessionCounter"
+@rendermode InteractiveWebAssemblyWithoutPrerendering
+
+@inject NavigationManager nav
+
+<PageTitle>セッション型カウンター</PageTitle>
+
+<h1>セッション型カウンター（1ページ目）</h1>
+
+<p role="status">Current count: @ClientSession.CurrentCount</p>
+<button class="btn btn-primary" @onclick="IncrementCount">増やす</button>
+<button class="btn btn-primary" @onclick="MoveToNextPage">次のページへ</button>
+
+<p>このコンポーネントは現在 @(OperatingSystem.IsBrowser() ? "WASM" : "Server") で動作しています。</p>
+
+@code {
+    private void IncrementCount()
+    {
+        ClientSession.CurrentCount++;
+        this.StateHasChanged();
+    }
+
+    private void MoveToNextPage()
+    {
+        nav.NavigateTo("/Samples/ClientSessionCounter2");
+    }
+
+
+}

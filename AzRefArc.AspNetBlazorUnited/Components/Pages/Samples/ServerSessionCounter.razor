@@ -1,0 +1,50 @@
+﻿@page "/Samples/ServerSessionCounter"
+@rendermode InteractiveServerWithoutPrerendering
+
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage storage
+
+@inject NavigationManager nav
+
+<PageTitle>セッション型カウンター</PageTitle>
+
+<h1>セッション型カウンター（1ページ目）</h1>
+
+@if (currentCount.HasValue)
+{
+    <p role="status">Current count: @currentCount</p>
+    <button class="btn btn-primary" @onclick="IncrementCount">増やす</button>
+    <button class="btn btn-primary" @onclick="MoveToNextPage">次のページへ</button>
+}
+else
+{
+    <p>データを取得中です...</p>
+}
+
+<p>このコンポーネントは現在 @(OperatingSystem.IsBrowser() ? "WASM" : "Server") で動作しています。</p>
+
+@code {
+    private int? currentCount = 0;
+    private static string COUNTER_KEY = "Samples.SessionCounter.CurrentCount";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // 注意）このページはプリレンダリングなしで動作する前提で記述されています。
+        // プリレンダリングありだと下記の処理は動作しません。詳細 → https://github.com/nakamacchi/Sample_BlazorBook?tab=readme-ov-file#p53-oninitializedasync-%E5%87%A6%E7%90%86%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
+        var result = await storage.GetAsync<int>(COUNTER_KEY);
+        currentCount = result.Success ? result.Value : 0;
+    }
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        await storage.SetAsync(COUNTER_KEY, currentCount!.Value);
+    }
+
+    private void MoveToNextPage()
+    {
+        nav.NavigateTo("/Samples/ServerSessionCounter2");
+    }
+
+
+}

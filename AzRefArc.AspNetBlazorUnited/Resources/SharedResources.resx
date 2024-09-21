@@ -120,4 +120,7 @@
   <data name="Greeting" xml:space="preserve">
     <value>Hello World!</value>
   </data>
+  <data name="Greeting2" xml:space="preserve">
+    <value>Hello2</value>
+  </data>
 </root>

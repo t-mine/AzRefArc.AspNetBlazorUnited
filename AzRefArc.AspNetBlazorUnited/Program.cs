@@ -80,7 +80,18 @@ namespace AzRefArc.AspNetBlazorUnited
                 builder.Services.AddDataProtection().PersistKeysToDbContext<DataProtectionKeyDbContext>().SetApplicationName("AzRefArc.AspNetBlazorUnited");
             }
 
+            // ‘½Œ¾Œê‘Î‰ž
+            builder.Services.AddLocalization();
+
             var app = builder.Build();
+
+            // ‘½Œ¾Œê‘Î‰ž
+            var supportedCultures = new[] { "ja", "en" };
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+            app.UseRequestLocalization(localizationOptions);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

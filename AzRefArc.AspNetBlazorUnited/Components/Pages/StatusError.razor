@@ -1,0 +1,10 @@
+﻿@page "/statuserror/{Status}"
+
+<h3>エラーが発生しました</h3>
+
+<h3>ステータスコード:@Status</h3>
+
+@code {
+    [Parameter]
+    public string Status { get; set; }
+}

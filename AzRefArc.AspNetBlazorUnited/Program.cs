@@ -17,6 +17,7 @@ namespace AzRefArc.AspNetBlazorUnited
 
             var builder = WebApplication.CreateBuilder(args);
 
+
             // Web API —˜—p‚Ì‚½‚ß‚É’Ç‰Á
             builder.Services.AddControllers(); 
             
@@ -98,6 +99,8 @@ namespace AzRefArc.AspNetBlazorUnited
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStatusCodePagesWithRedirects("/statuserror/{0}");
 
             app.UseStaticFiles();
             app.UseAntiforgery();
